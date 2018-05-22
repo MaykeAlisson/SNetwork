@@ -1,0 +1,110 @@
+/*-----------------BARRA DE NAVEGAÇÃO-------------*/
+/* LOGO */
+.img-logo{
+	height: 40px;
+	width: 132px;
+	display: block;
+	background: url('../img/logoB.png') no-repeat ;
+	background-size: contain; 
+	color: transparent;
+}
+/* BARRA TRANSPARENTE */
+.navbar-brand{
+	padding: 0px;
+	padding-top: 5px;	
+}
+/* ESTADO LINKS */
+.navbar-inverse .navbar-nav>li>a {
+	color: white;
+}
+/* ESTADO HOVER DO MENU */
+.navbar-inverse .navbar-nav>li>a:hover {
+	color: #9bf0e1;
+	text-decoration: none;
+}
+
+.navbar-inverse ul{
+	list-style-type: none;
+}
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover{
+	background: transparent;
+}
+
+/*-----------------MENU PERFIL-------------*/
+#menuPerfil{
+	background: #DCDCDC;
+	margin-top: -20px;
+}
+
+#menuPerfil a {
+	color: #333;
+}
+#menuPerfil>a:hover{
+	color: #9bf0e1;
+	text-decoration: none;
+}
+
+.imgPerfil{
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+.nomePerfil{
+	margin-top: 20px;
+}
+.emailPerfil{
+	margin-top: 10px;
+}
+.senhaPerfil{
+	margin-top: 10px;
+}
+.senhaPerfil span{
+	font-size: 12px;
+}
+.profissaoPerfil{
+	margin-top: 10px;
+}
+.observacaoPerfil{
+	margin-top: 10px;
+}
+.localPerfil{
+	margin-top: 10px;
+}
+.nascimentoPerfil{
+	margin-top: 10px;
+}
+.telefonePerfil{
+	margin-top: 10px;
+}
+.statusPerfil{
+	margin-top: 10px;
+}
+.likePerfil{
+	margin-top: 10px;
+}
+.ajudaPerfil{
+	margin-top: 10px;
+}
+.sairPerfil{
+	margin-top: 10px;
+}
+.deletarPerfil{
+	margin-top: 10px;
+}
+
+/*-----------------FORMULARIO PERFIL-------------*/
+#textForm{
+	text-align: center;
+	margin-top: -20px;
+}
+
+#formPerfil{
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#btnAtualizar{
+	margin-top: 10px;
+	margin-left: 20px;
+}

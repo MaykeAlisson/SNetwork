@@ -1,0 +1,62 @@
+/* BARRA DE NAVEGAÇÃO */
+body{
+	font-family: "Helvetica Neue", "Helvetica", Helvetica, Arial, sans-serif;
+}
+
+/* IMAGEM LOGO */
+.img-logo{
+	margin-top: 5px;
+	height: 40px;
+	width: 132px;
+	display: block;
+	background: url('../img/logoB.png') no-repeat ;
+	background-size: contain; 
+	color: transparent;
+	right: 70px;
+	height: 100px;
+}
+
+/* ESTRUTURA DA BARRA DE MENU */
+#barra{
+	background: #000;
+	height: 20px;
+	display: block;
+}
+#barra.container a:link{
+	text-decoration: none;
+}
+
+/* ESTILO CAMPO POSSUE CONTA */
+#possuiConta{
+	display: inline-block;
+    color: #898989;
+    font-size: 14px;
+}
+
+/* DOPBOX LOGAR */
+#logar{
+	display: inline-block;
+    vertical-align: middle;
+    color: #2c71a5;
+    margin-left: 5px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+/* ESTILO FORMULARIO DE CADASTRO */
+#formulario{
+	padding-bottom: 80px;
+}
+
+/* FORMATAÇAO H3 */
+section h3{
+	text-align: center;
+	padding-bottom: 50px;
+}
+
+/* FORMATACAO BOTAO FORMULARIO */
+#btnCadastro{
+	margin-top: 20px;
+}
+
+

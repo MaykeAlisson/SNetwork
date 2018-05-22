@@ -1,0 +1,45 @@
+create database snetwork;
+
+use snetwork;
+
+create table usuario(
+id int auto_increment primary key,
+nome varchar(70) NOT NULL,
+email varchar(70) NOT NULL,
+senha varchar(32) NOT NULL,
+nascimento date NOT NULL,
+idEstado int NOT NULL,
+idCidade int NOT NULL,
+idProfissao int NOT NULL,
+sexo varchar(1) NOT NULL,
+telefone varchar(11) NOT NULL,
+disponibilidade varchar(1),
+avaliacao int,
+observacao varchar(50),
+criacao datetime default current_timestamp
+) engine=MyISAM default charset=utf8 collate=utf8_unicode_ci;
+
+
+create table proficao(
+id int auto_increment primary key,
+nome varchar(72) NOT NULL
+) engine=MyISAM default charset=utf8 collate=utf8_unicode_ci;
+
+
+create table log(
+id int auto_increment primary key);
+
+
+
+CREATE TABLE `cidades` (
+`estados_cod_estados` int(11) DEFAULT NULL,
+`cod_cidades` int(11) DEFAULT NULL,
+`nome` varchar(72) COLLATE utf8_unicode_ci DEFAULT NULL,
+`cep` varchar(8) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+CREATE TABLE `estados` (
+`cod_estados` int(11) DEFAULT NULL,
+`sigla` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+`nome` varchar(72) COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
