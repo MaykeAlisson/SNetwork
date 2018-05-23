@@ -4,11 +4,13 @@ GRADUADO EM ANALISE E DESENVOLVIMENTO DE SISTEMAS
 -->
 <?php
 include ("conecta.php"); 
-  session_start();
+session_start();
 
-  if(!isset($_SESSION['email'])){
-    header('Location: index.php?erro=1');
-  }
+
+if(!isset($_SESSION['usuario'])){
+  header('Location: index.php?erro=1');
+}
+
 
 
 ?>
@@ -24,6 +26,7 @@ include ("conecta.php");
 
   <!-- jquery - link cdn -->
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script type="text/javascript" src="js/funcao.js"></script>
   <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <!--CSS-->
@@ -78,7 +81,7 @@ include ("conecta.php");
       <img src="img/imgPerfil.png">
     </div>
     <div class="nomePerfil">
-      <span class="glyphicon glyphicon-user" aria-hidden="true"> <?=$_SESSION['nome']?> </span>
+      <span class="glyphicon glyphicon-user" aria-hidden="true" style="word-spacing: -6px;"> <?=$_SESSION['nome']?> </span>
     </div>
     <div class="emailPerfil">
       <span class="glyphicon glyphicon-envelope" aria-hidden="true"> <?=$_SESSION['email']?> </span>
@@ -87,13 +90,16 @@ include ("conecta.php");
       <span class="glyphicon glyphicon-lock"> ***** </span>
     </div>
     <div class="profissaoPerfil">
-      <span class="glyphicon glyphicon-education"> <?=$_SESSION['idProfissao']?> </span>
+      <span class="glyphicon glyphicon-education" style="word-spacing: -6px;"> <?=$_SESSION['idProfissao']?> </span>
+    </div>
+    <div class="profissaoPerfil">
+      <span class="glyphicon glyphicon-education" style="word-spacing: -6px;"> <?=$_SESSION['idProfissao2']?> </span>
     </div>
     <div class="observacaoPerfil">
-      <span class="glyphicon glyphicon-star-empty" aria-hidden="true"> <?=$_SESSION['observacao']?></span>
+      <span class="glyphicon glyphicon-star-empty" aria-hidden="true" style="word-spacing: -6px;"> <?=$_SESSION['observacao']?></span>
     </div>
     <div class="localPerfil">
-      <span class="glyphicon glyphicon-globe" aria-hidden="true"> <?=$_SESSION['idCidade']?>-<?=$_SESSION['idEstado']?> </span>
+      <span class="glyphicon glyphicon-globe" aria-hidden="true" style="word-spacing: -6px;"> <?=$_SESSION['idCidade']?></span>
     </div>
     <div class="nascimentoPerfil">
       <span class="glyphicon glyphicon-calendar"> <?=$_SESSION['nascimento']?> </span>
@@ -105,7 +111,7 @@ include ("conecta.php");
       <span class="glyphicon glyphicon-refresh"> <?=$_SESSION['disponibilidade']?> </span>
     </div>
     <div class="likePerfil">
-      <span class="glyphicon glyphicon-thumbs-up"> <?=$_SESSION['avaliacao']?> </span>
+      <span class="glyphicon glyphicon-thumbs-up" style="word-spacing: -6px;"> Em Breve </span>
     </div>
     <div class="ajudaPerfil">
       <a href="" class="glyphicon glyphicon-question-sign"> Ajuda </a>
@@ -114,7 +120,7 @@ include ("conecta.php");
       <a href="sair.php" class="glyphicon glyphicon-off"> Sair </a>
     </div>
     <div class="deletarPerfil">
-      <a href="" class="glyphicon glyphicon-trash"> Excluir Conta </a>
+      <a href="deletar.php" class="glyphicon glyphicon-trash" style="word-spacing: -6px;"> Excluir Conta </a>
     </div>
   </div>
   <div class="col-md-10" >
@@ -122,15 +128,16 @@ include ("conecta.php");
       <h3>Meus Dados</h3>
     </div>
     <div id="formPerfil">
-      <form method="post" action="">
+      <form method="post" action="alteraUsuario.php">
         <div class="form-row">
           <div class="form-group col-md-4">
+            <input type="hidden" name="id" value="<?=$_SESSION['id']?>">
             <label>Nome</label>
-            <input type="text" class="form-control" name="" id="" value="<?=$_SESSION['nome']?>">
+            <input type="text" class="form-control" name="nome" id="" value="<?=$_SESSION['nome']?>">
           </div>
           <div class="form-group col-md-4">
             <label>Email</label>
-            <input type="email" class="form-control" disabled name="" id="" value="<?=$_SESSION['email']?>">
+            <input type="email" class="form-control" name="email" id="" value="<?=$_SESSION['email']?>">
           </div>
           <div class="col-md-4 form-group">
             <label>Senha</label>
@@ -138,17 +145,42 @@ include ("conecta.php");
           </div>
         </div>
         <div class="form-row">
+          <!--FUNCAO LISTA ESTADO -->
+          <?php
+          function listaEstado($conexao){
+            $estados = array();
+            $resultado = mysqli_query($conexao, "select * from estados");
+            while ($estado = mysqli_fetch_assoc($resultado)) {
+              array_push($estados, $estado);
+            }
+            return $estados;
+          } 
+          ?>
           <div class="col-md-4 form-group" id="perfilFormEstado">
-            <label>Estado</label>
-            <input type="text" class="form-control" disabled name="" id="" value="<?=$_SESSION['idEstado']?>" style="width:200px;font-size: 13px">
+            <label for="cod_estados">Estado</label>
+            <select name="estados" id="estados" class="form-control" required="required">
+              <option selected="">Selecione seu Estado</option>
+              <?php 
+              $estados = listaEstado($conexao);
+              foreach ($estados as $estado) {
+                $esseEOEstado = $_SESSION['idEstado'] == $estado['cod_estados'];
+                $selecao = $esseEOEstado ? "selected='selected'" : "";
+                ?>
+                <option value="<?=$estado['cod_estados']?>" <?=$selecao?>><?=$estado['sigla']?>-<?=$estado['nome']?></option> 
+                <?php
+              }
+              ?>
+            </select>
           </div>
           <div class="col-md-4 form-group">
-            <label>Cidade</label>
-            <input type="text" class="form-control" disabled name="" id="" value="<?=$_SESSION['idCidade']?>" style="width:200px;font-size: 13px">
+            <label for="cod_cidades">Cidade</label>
+            <select name="cidades" id="cidades" class="form-control" required="required">
+              <option selected="">Selecione primeiro um Estado</option>
+            </select>
           </div>
           <div class="col-md-4 form-group">
             <label>Telefone</label>
-            <input type="text" class="form-control" name="" id="" value="<?=$_SESSION['telefone']?>" style="width:150px;font-size: 13px">
+            <input type="text" class="form-control" name="telefone" id="" value="<?=$_SESSION['telefone']?>" style="width:150px;font-size: 13px">
           </div>
         </div>
         <div class="form-row">
@@ -171,32 +203,70 @@ include ("conecta.php");
           <input type="text" class="form-control"
           disabled name="" id="" maxlength="10"  size="14"  onKeyPress='MascaraData(this);' autocomplete="off" value="<?=$_SESSION['nascimento']?>" style="width:130px;font-size: 13px">
         </div>
+        <?php
+        function listaProfissao($conexao){
+          $profissoes = array();
+          $resultadoP = mysqli_query($conexao, "select * from profissao");
+          while ($profissao = mysqli_fetch_assoc($resultadoP)) {
+            array_push($profissoes, $profissao);
+          }
+          return $profissoes;
+        }
+        ?>
         <div class="col-md-4 form-group">
-          <label>Profissão</label>
-          <input type="text" class="form-control" disabled name="" id="" value="<?=$_SESSION['idProfissao']?>" style="width:200px;font-size: 13px">
-        </div>
-        <div class="col-md-4 form-group" id="perfilObservacao">
-          <label>Especialização</label>
-          <input type="text" class="form-control" name="observacao" value="<?=$_SESSION['observacao']?>" style="width:200px;font-size: 13px">
-        </div>
+         <label for="inputProfissao">1ª Profissão</label>
+         <select name="profissao" id="profissao" class="form-control" required="required">
+          <option selected="">Selecione sua 1ª Profissão</option>
+          <?php
+          $profissoes = listaProfissao($conexao);
+          foreach ($profissoes as $profissao) {
+            $essaEhAProfissao = $_SESSION['idProfissao'] == $profissao['nome'];
+            $selecao = $essaEhAProfissao ? "selected='selected'" : "";
+            ?>
+            <option value="<?=$profissao['nome']?>" <?=$selecao?>><?=$profissao['nome']?></option>
+            <?php
+          }
+          ?>
+        </select>
       </div>
-      <div class="form-row">
-        <div class="col-md-4 form-group">
-          <label>Status</label>
-          <br />
-          <input class="form-check-input" type="radio" name="radio" value="Ativo" id="" checked="">
-          <label>Ativo</label>
-          <input class="form-check-input" type="radio" name="radio" value="Ocupado" id="">
-          <label>Ocupado</label>
-        </div>
-        <div class="col-md-8 form-group" id="perfilFormLike">
-          <label>Like</label>
-          <input type="text" class="form-control" disabled name="" value="<?=$_SESSION['avaliacao']?>"  style="width:50px;font-size: 13px">
-        </div>
+      <div class="col-md-4 form-group">
+        <label>2° Profissão</label>
+        <select name="profissao2" id="profissao2" class="form-control" required="required" style="width: 200px;">
+          <option selected="">Selecione sua 1ª Profissão</option>
+          <?php
+          $profissoes = listaProfissao($conexao);
+          foreach ($profissoes as $profissao) {
+            $essaEhAProfissaoB = $_SESSION['idProfissao2'] == $profissao['nome'];
+            $selecaoB = $essaEhAProfissaoB ? "selected='selected'" : "";
+            ?>
+            <option value="<?=$profissao['nome']?>" <?=$selecaoB?>><?=$profissao['nome']?></option>
+            <?php
+          }
+          ?>
+        </select>
       </div>
-      <button type="submit" class="btn btn-info" id="btnAtualizar">Atualizar</button>
-    </form>
-  </div>
+      <div class="col-md-4 form-group" id="perfilObservacao">
+        <label>Especialização</label>
+        <input type="text" class="form-control" name="observacao" value="<?=$_SESSION['observacao']?>" style="width:200px;font-size: 13px">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="col-md-4 form-group">
+        <label>Status</label>
+        <br />
+        <input class="form-check-input" type="radio" name="radio" value="Ativo" id="" checked="">
+        <label>Ativo</label>
+        <input class="form-check-input" type="radio" name="radio" value="Ocupado" id="">
+        <label>Ocupado</label>
+      </div>
+      <div class="col-md-4 form-group" id="perfilFormLike">
+        <label>Avaliação</label>
+        <input type="text" class="form-control" disabled name="" value="Em Breve"  style="width:150px;font-size: 13px">
+      </div>
+    </div>
+    <button type="submit" class="btn btn-info" id="btnAtualizar">Atualizar</button>
+  </form>
+</div>
 </div>
 
 

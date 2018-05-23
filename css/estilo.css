@@ -35,6 +35,7 @@ nav.navbar-transparente{
 /* ESTADO LINKS */
 .navbar-inverse .navbar-nav>li>a, footer .nav a{
 	color: white;
+	margin-right: -5px;
 }
 
 .navbar-inverse .navbar-nav>li>a:hover, footer .nav a:hover{/* ESTADO HOVER DO MENU */
@@ -260,24 +261,14 @@ h2{/* FORMATAÇAO H2 */
 
 /*------------------------CARD--------------------*/
 .cardUser{
-	height: 160px; /* AUTURA DO CARD */
-	width: 165px;  /* LARGURA CARD */
+	height: 105px; /* AUTURA DO CARD */
+	/*width: 400px;   LARGURA CARD */
 	margin-right: 5px;
 	margin-bottom: 5px;
 	border: 1px solid #A9A9A9;
     border-radius: 6px;
-	float: left;
-}
-
-.cardLike{
-	background: #e6e6fa;
-}
-.cardLike span{
-	font-size: 12px;
-	margin-left: 10px;
-}
-.cardLike button{
-	margin-left: 10px;
+	/*float: left;*/
+	max-width: 682px;
 }
 
 .cardNome{
@@ -285,12 +276,17 @@ h2{/* FORMATAÇAO H2 */
 	font-size: 15px;
 	font-weight: 700;
     line-height: 21px;
-	text-align: center;
+	/*text-align: center;*/
 }
 
 .cardPro{
-	text-align: center;
+	/*text-align: center;*/
 	margin-top: 5px;
+}
+
+.cardPro2{
+	/*text-align: center;*/
+	margin-left: 10px
 }
 
 .cardInfo{
@@ -315,7 +311,7 @@ ul.cardUl {
     vertical-align: top;
 }
 .cardValue {
-    display: block;
+    /*display: block;*/
     font-size: 12px;
     font-weight: 500;
     transition: color 0.15s ease-in-out 0s;
@@ -328,11 +324,16 @@ ul.cardUl {
     text-transform: uppercase;
     transition: color 0.15s ease-in-out 0s;
 }
-
-.cardTel{
-	margin-top: 5px;
-	text-align: center;
+.btn-sm{
+	margin-top: -7px;
+	float: right;
+	background-color: #5a87e6;
 }
+
+#tel{
+	margin-left: 10px;
+}
+
 /* ----------------------------------RODAPE-------------------------------------------- */
 footer{
 	background: #000;

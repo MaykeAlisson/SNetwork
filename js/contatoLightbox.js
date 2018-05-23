@@ -1,5 +1,5 @@
 $(document).ready(function () {
-	$('.lightbox').click(function () {
+	$('.lightboxC').click(function () {
 		$('.background').animate({'opacity':'.60'}, 300, 'linear');
 		$('.box').animate({'opacity':'1.00'}, 300, 'linear');
 		$('.background, .box').css('display', 'block');

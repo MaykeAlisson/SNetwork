@@ -1,104 +1,101 @@
 <?php
+
 include("conecta.php") ;
-include("banco_usuario.php") ;
 
 session_start();
 
-$nome = $_POST["nome"];
-$estado = $_POST["estados"];
-$cidade = $_POST["cidades"];
-$profissao = $_POST["profissao"];
-$sexo = $_POST["radio"];
+
+$nome = $_POST['nome'];
+$email = $_POST['email'];
+$usuario = $_POST['usuario'];
+$senha =md5($_POST['senha']);
+$pergunta = $_POST['pergunta'];
+$resposta = $_POST['resposta'];
+$estado = $_POST['estados'];
+$cidade = $_POST['cidades'];
+$profissao = $_POST['profissao'];
+$profissao2 = $_POST['profissao2'];
+$sexo = $_POST['radio'];
 $nascimento = implode('-', array_reverse(explode('/', $_POST["nascimento"]))) ;
-$telefone = $_POST["telefone"];
-$email = $_POST["email"];
-$senha =md5($_POST["senha"]);
+$telefone = $_POST['telefone'];
 
 
-$email_existe = false;
+
+$usuario_existe = false;
 
 
       //VERIFICA SE O USUARIO JA EXISTE
-$sql = "select *from usuario where email = '$email'";
+$sql = "select *from usuario where usuario = '$usuario'";
 if($resultado_id = mysqli_query($conexao, $sql)){
 
-      $dados_usuario = mysqli_fetch_array($resultado_id);
+  $dados_usuario = mysqli_fetch_array($resultado_id);
 
-      if(isset($dados_usuario['email'])){
-            $email_existe = true;
-      }
+  if(isset($dados_usuario['usuario'])){
+    $usuario_existe = true;
+  }
 
 }else{
-      echo "Erro ao tentar localizar o registro de usuario";
+  echo "Erro ao tentar localizar o registro de usuario";
 }
 
 
-if ($email_existe) {
+if ($usuario_existe) {
 
-      $retorno_get = "erro_email=1&";
-      header('Location: cadastro.php?'.$retorno_get);
-      die();
+  $retorno_get = "erro_usuario=1&";
+  header('Location: cadastro.php?'.$retorno_get);
+  die();
 }
 
 
 
-if (insereUsuario($conexao, $nome, $email, $senha, $estado, $cidade, $profissao, $sexo, $nascimento, $telefone)) { 
-
-      $novoEmail = $email;
-
-      $sql = " SELECT * FROM usuario WHERE email = '$novoEmail' ";
-
-      $resultado_sql = mysqli_query($conexao, $sql);
-
-      if ($resultado_sql) {
-            $dados_usuario = mysqli_fetch_array($resultado_sql);
-
-            var_dump($dados_usuario);
-      }
-
-     /*$novoId = $id;
-      $novoNome = $nome;
-      $novoEmail = $email;
-      $novaSenha = $senha;
-      $novoEstado = $estado;
-      $novoCidade = $cidade;
-      $novoProfissao = $profissao;
-      $novoSexo = $sexo;
-      $novoNascimento = $nascimento;
-      $novoTelefone = $telefone;
-      $novoObservacao = $observacao;
-      $novoDisponibilidade = $disponibilidade;
-      $novoAvaliacao = $avaliacao;
-      $novoCriacao = $criacao;
-      
 
 
-      $_SESSION['id'] = $novoId;
-      $_SESSION['nome'] = $novoNome;
-      $_SESSION['email'] = $novoEmail;
-      $_SESSION['idProfissao'] = $novoProfissao;
-      $_SESSION['observacao'] = $novoObservacao;
-      $_SESSION['idCidade'] = $novoCidade;
-      $_SESSION['idEstado'] = $novoEstado;
-      $_SESSION['nascimento'] = $novoNascimento;
-      $_SESSION['telefone'] = $novoTelefone;
-      $_SESSION['disponibilidade'] = $novoDisponibilidade;
-      $_SESSION['avaliacao'] = $novoAvaliacao;
-      $_SESSION['criacao'] = $novoCriacao;
+$sql = " insert into usuario(nome, email, usuario, senha, idPergunta, resposta, idEstado, idCidade, idProfissao, idProfissao2, sexo, nascimento, telefone) values ('$nome', '$email', '$usuario', '$senha', '$pergunta', '$resposta', '$estado', '$cidade', '$profissao', '$profissao2', '$sexo', '$nascimento', '$telefone') ";
 
 
-      header('Location: perfil.php');*/
+if (mysqli_query($conexao, $sql)) {
+  
+  $query = " select *from usuario where usuario = '$usuario' ";
+  $consulta = mysqli_query($conexao, $query);
 
-      
-             }else{ // CASO DER ERRO
+  $dadosUsuario = mysqli_fetch_array($consulta);
 
-             	$msg = mysqli_error($conexao);
-             	
-             } 
 
-             mysqli_close($conexao);
+  if (isset($dadosUsuario['usuario'])) {
+    
+    $_SESSION['id'] = $dadosUsuario['id'];
+    $_SESSION['nome'] = $dadosUsuario['nome'];
+    $_SESSION['usuario'] = $dadosUsuario['usuario'];
+    $_SESSION['email'] = $dadosUsuario['email'];
+    $_SESSION['idProfissao'] = $dadosUsuario['idProfissao'];
+    $_SESSION['idProfissao2'] = $dadosUsuario['idProfissao2'];
+    $_SESSION['observacao'] = $dadosUsuario['observacao'];
+    $_SESSION['idCidade'] = $dadosUsuario['idCidade'];
+    $_SESSION['idEstado'] = $dadosUsuario['idEstado'];
+    $_SESSION['nascimento'] = $dadosUsuario['nascimento'];
+    $_SESSION['telefone'] = $dadosUsuario['telefone'];
+    $_SESSION['disponibilidade'] = $dadosUsuario['disponibilidade'];
+    $_SESSION['avaliacao'] = $dadosUsuario['avaliacao'];
+    $_SESSION['criacao'] = $dadosUsuario['criacao'];
 
-             ?>
+    header('Location: perfil.php');
 
-             
+  }else{
+
+    header('Location: index.php?erro=1');
+
+  }
+
+}else{
+
+  $msg = mysqli_error($conexao);
+  echo $msg;
+
+}
+
+mysqli_close($conexao);
+
+?>
+
+
 

@@ -2,25 +2,46 @@ create database snetwork;
 
 use snetwork;
 
+create table pergunta(
+id int auto_increment primary key,
+pergunta varchar(150)
+)engine=MyISAM default charset=utf8 collate=utf8_unicode_ci;
+
 create table usuario(
 id int auto_increment primary key,
 nome varchar(70) NOT NULL,
 email varchar(70) NOT NULL,
+usuario varchar(50) NOT NULL unique,
 senha varchar(32) NOT NULL,
+idPergunta int NOT NULL,
+resposta varchar(70) NOT NULL,
 nascimento date NOT NULL,
 idEstado int NOT NULL,
 idCidade int NOT NULL,
 idProfissao int NOT NULL,
+idProfissao2 int NOT NULL default 0,
 sexo varchar(1) NOT NULL,
-telefone varchar(11) NOT NULL,
-disponibilidade varchar(1),
-avaliacao int,
+telefone varchar(15) NOT NULL,
+disponibilidade varchar(7) default "Ativo",
+avaliacao int default 0,
 observacao varchar(50),
 criacao datetime default current_timestamp
 ) engine=MyISAM default charset=utf8 collate=utf8_unicode_ci;
 
 
-create table proficao(
+create table coleta(
+id int auto_increment primary key,
+nome varchar(70) NOT NULL,
+telefone varchar(15) NOT NULL,
+sexo varchar(1) NOT NULL,
+cep int NOT NULL,
+email varchar(70) NOT NULL,
+nascimento varchar(15) NOT NULL,
+coleta datetime default current_timestamp
+)engine=MyISAM default charset=utf8 collate=utf8_unicode_ci;
+
+
+create table profissao(
 id int auto_increment primary key,
 nome varchar(72) NOT NULL
 ) engine=MyISAM default charset=utf8 collate=utf8_unicode_ci;
@@ -32,14 +53,30 @@ id int auto_increment primary key);
 
 
 CREATE TABLE `cidades` (
-`estados_cod_estados` int(11) DEFAULT NULL,
-`cod_cidades` int(11) DEFAULT NULL,
-`nome` varchar(72) COLLATE utf8_unicode_ci DEFAULT NULL,
-`cep` varchar(8) COLLATE utf8_unicode_ci DEFAULT NULL
+  `estados_cod_estados` int(11) DEFAULT NULL,
+  `cod_cidades` int(11) DEFAULT NULL,
+  `nome` varchar(72) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `cep` varchar(8) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `estados` (
-`cod_estados` int(11) DEFAULT NULL,
-`sigla` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
-`nome` varchar(72) COLLATE utf8_unicode_ci DEFAULT NULL
+  `cod_estados` int(11) DEFAULT NULL,
+  `sigla` varchar(2) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `nome` varchar(72) COLLATE utf8_unicode_ci DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+
+alter table usuario add constraint fk_idCidade foreign key (idCidade) references cidades (cod_cidades);
+alter table usuario add constraint fk_idProfissao foreign key (idProfissao) references profissao (id);
+alter table usuario add constraint fk_idProfissao2 foreign key (idProfissao2) references profissao (id);
+alter table usuario add constraint fk_idEstado foreign key (idEstado) references estados (cod_estados);
+alter table usuario add constraint fk_idPergunta foreign key (idPergunta) references pergunta (id);
+alter table usuario add constraint fk_idColeta foreign key (idColeta) references coleta (id);
+
+
+alter table usuario change email email varchar(70) unique not null;
+
+alter table usuario add idColeta int ;
+
+
+

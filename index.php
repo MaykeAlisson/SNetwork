@@ -4,7 +4,6 @@ GRADUADO EM ANALISE E DESENVOLVIMENTO DE SISTEMAS
 -->
 <?php
 include ("conecta.php"); 
-include ("login.php");
 
 session_start();
 
@@ -25,19 +24,23 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
 
   <!-- jquery - link cdn -->
   <script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
   <!-- javascript - local -->
   <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="js/listaCard.js"></script>
   <script type="text/javascript" src="js/buscaServico.js"></script>
   <script type="text/javascript" src="js/contatoLightbox.js"></script>
   <script type="text/javascript" src="js/cadastroUserLightbox.js"></script>
-  <script type="text/javascript" src="js/loginLightbox.js"></script>
+  <script type="text/javascript" src="js/coletaLightbox.js"></script>
   <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <!--CSS-->
+  <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link href="css/estilo.css" rel="stylesheet">
   <link href="css/contato.css" rel="stylesheet">
   <link href="css/cadastroUser.css" rel="stylesheet">
+  <link href="css/coleta.css" rel="stylesheet">
+  <link href="css/avaliacao.css" rel="stylesheet">
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -67,10 +70,13 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
         <div class="collapse navbar-collapse" id="barra-navegacao">
           <ul class="nav navbar-nav">
             <li><a href="index.php">Home</a></li>
-            <li><a href="#" class="lightbox">Contato</a></li>
+            <li><a href="#" class="lightboxC">Contato</a></li>
+            <li><a href="">Ajuda</a></li>
           </ul>
           <form class="navbar-form navbar-left" role="search" id="formBuscaServico"><!-- INICIO COMPO PESQUISA CATEGORIA -->
-           <div class="form-group left-inner-addon">
+            <input type="hidden" name="registros_por_pagina" id="registros_por_pagina" value="5" />
+          <input type="hidden" name="offset" id="offset" value="0" />
+           <div class="form-group left-inner-addon" id="#buscaSer">
              <i class="glyphicon glyphicon-search"></i>
              <input type="text" id="nomeServico" name="nomeServico" class="form-control" placeholder="Serviço" style="width: 150px"><!-- /CAMPO DE PESQUISA CATEGORIA-->
            </div> 
@@ -83,8 +89,7 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
         </form>
         <div>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="cadastro.php">Anunciar Serviço</a></li>
-            <li><a href="#" class="lightboxCad">Cadastrar</a></li>
+            <li><a href="cadastro.php">Cadastrar</a></li>
             <li class="dropdown <?= $erro == 1 ? 'open' : '' ?>">
               <a id="entrar" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Entrar</a>
               <ul id="login-dp" class="dropdown-menu">
@@ -95,8 +100,8 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
                     <br /><br />
                     <form class="form" role="form" method="post" action="validar_acesso.php" accept-charset="UTF-8" id="login-nav">
                       <div class="form-group">
-                       <label class="sr-only">Email</label>
-                       <input type="email" class="form-control" name="email" id="formLogarEmail" placeholder="Digite seu email" required>
+                       <label class="sr-only">Usuário</label>
+                       <input type="text" class="form-control" name="usuario" id="formLogarEmail" placeholder="Digite seu usuário" required>
                      </div>
                      <div class="form-group">
                        <label class="sr-only">Senha</label>
@@ -114,124 +119,56 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
                    ?>
                  </div>
                  <div class="bottom text-center">
-                  Novo aqui ? <a href="cadastro.php"><b>Junte-se a nós</b></a>
+                  Novo aqui ? <a href="#" class="lightboxCad"><b>Junte-se a nós</b></a>
+                  Anunciar Serviço ? <a href="cadastro.php"><b>Aqui</b></a>
                 </div>
               </div>
             </li>
           </ul>
-        </div>
-      </div>   
-    </div><!-- /CONTAINER-->
-  </nav><!-- /NAV -->
+        </ul>
+      </div>
+    </div>   
+  </div><!-- /CONTAINER-->
+</nav><!-- /NAV -->
 
-  <!--CONTATO-->
-  <div class="background" ></div>
-    <div class="box"><div class="close">X</div>
-        <h1>Entre em contato</h1>
-    <p>
-      Para Dúvidas, Elogios, Críticas e/ou sugestões.
-    </p>
-    <form class="form" action="contatoDAO.php" method="post">
-      <div class="input-wrap">
-      <label class="input-label">Nome</label>
-      <input type="text" class="input" name="nome" required>
-      </div>
-      <div class="input-wrap">
-      <label class="input-label">Email</label>
-      <input type="email" class="input" name="email" required>
-      </div>
-      <div class="input-wrap">
-      <label class="input-label">Mensagem</label>
-      <textarea class="textarea" name="textarea" required></textarea>
-      </div>
-      <div class="input-wrap">
-        <input class="form-submit btnContato" type="submit" value="Enviar">
-      </div>
-    </form>  
-  </div><!-- //FIM CONTATO -->
+<!--CONTATO-->
+<div class="background" ></div>
+<div class="box"><div class="close">X</div>
+<h1>Entre em contato</h1>
+<p>
+  Para Dúvidas, Elogios, Críticas e/ou sugestões.
+</p>
+<form class="form" action="enviarContato.php" method="post">
+  <div class="input-wrap">
+    <label class="input-label">Nome</label>
+    <input type="text" class="input" name="nome" required>
+  </div>
+  <div class="input-wrap">
+    <label class="input-label">Email</label>
+    <input type="email" class="input" name="email" required>
+  </div>
+  <div class="input-wrap">
+    <label class="input-label">Mensagem</label>
+    <textarea class="textarea" name="textarea" required></textarea>
+  </div>
+  <div class="input-wrap">
+    <input class="form-submit btnContato" type="submit" value="Enviar">
+  </div>
+</form>  
+</div><!-- //FIM CONTATO -->
 
-   <!--CADASTRAR-->
-  <div class="backgroundCad" ></div>
-    <div class="boxCad"><div class="closeCad">X</div>
-    <h1>Faça pate desta equipe</h1>
-    <form action="" method="post">
-      <div class="form-row">
-        <div class="form-group col-md-6">
-            <label>Nome</label>
-            <input type="text" class="form-control" name="" id="" value="" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label>Telefone</label>
-            <input type="text" class="form-control" name="" id="" value="" required>
-          </div>
-          <div class="form-group form-check-inline col-md-5">
-            <label>Gênero</label><br>
-            <input class="form-check-input form-check-inline" type="radio" name="radio" value="m" id="" checked="">
-            <label>Masculino</label>
-            <input class="form-check-input form-check-inline" type="radio" name="radio" value="f" id="">
-            <label>Feminino</label>
-          </div>
-          <div class="form-group col-md-3">
-            <label>CEP</label>
-            <input class="form-control" type="text" name="" id="" value="" required>
-          </div>
-          <div class="form-group col-md-4"><br>
-            <a href="http://www.buscacep.correios.com.br/sistemas/buscacep/" target="_blank">Não sei meu CEP</a>            
-          </div>
-          <div class="form-group col-md-6">
-            <label>E-mail</label>
-            <input class="form-control" type="email" name="" id="" value="" required>
-          </div>
-          <div class="form-group col-md-6">
-            <label>Usuário</label>
-            <input class="form-control" type="text" name="" id="" value="" required>
-            <small id="" class="form-text text-muted">Lembre deste Usuario, o mesmo sera usado no login.</small>
-          </div>
-          <div class="form-group col-md-4">
-            <label>Senha</label>
-            <input class="form-control" type="password" name="" id="" value="" required>
-          </div>
-          <div class="form-group col-md-4">
-            <label>Confirmar Senha</label>
-            <input class="form-control" type="password" name="" id="" value="" required>
-          </div>
-          <div class="form-group col-md-4">
-            <script type='text/javascript'>
-          function MascaraData(obj) 
-          {
-           switch (obj.value.length) 
-           {
-            case 2:
-            obj.value = obj.value + "/";
-            break;
-            case 5:
-            obj.value = obj.value + "/";
-            break;
-          }
-        }
-      </script>
-            <label>Data Nascimento</label>
-            <input class="form-control" type="text" name="nascimento" id="nascimento" placeholder="dd/mm/aaaa" maxlength="10"  size="14"  onKeyPress='MascaraData(this);' autocomplete="off" required="required">
-          </div>
-          <div class="form-submit col-md-3">
-          <button type="submit" class="btn btn-info" id="">Cadastrar</button>
-          </div>
-        </div>
-      
-    </form>
-  </div><!-- //FIM CADASTRAR -->
 
-  <!-- DESCRIÇÃO SISTEMA -->
-  <div class="container capa" id="primeiraDiv">  
-   <h1 class="texto-capa">A qualquer hora, em qualquer lugar</h1>
-   <center>
-    <p class="desc">
-     Com todos os dados nas nuvens, a gestão do seu serviço fica mais fácil e prática. Você tem acesso à todas as informações a hora que quiser, de onde quiser e de qualquer dispositivo que esteja conectado à internet.
-   </p>
- </center>
- <div class="text-center">
-   <img src="img/teste.png" class="img" class="img-responsive" >
- </div>
+<!-- DESCRIÇÃO SISTEMA -->
+<div class="container capa" id="primeiraDiv">  
+ <h1 class="texto-capa">A qualquer hora, em qualquer lugar</h1>
+ <center>
+  <p class="desc">
+   Com todos os dados nas nuvens, a gestão do seu serviço fica mais fácil e prática. Você tem acesso à todas as informações a hora que quiser, de onde quiser e de qualquer dispositivo que esteja conectado à internet.
+ </p>
+</center>
+<div class="text-center">
+ <img src="img/teste.png" class="img" class="img-responsive" >
+</div>
 </div><!-- /CONTAINER-->
 
 <!-- CONTEUDOS -->
@@ -265,8 +202,17 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
           </h4>
         </div>
         <div class="row" id="addCard">
-          <!-- INICIO DO CARD-->          
+          <!-- INICIO DO CARD-->  
           
+
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-md-7">
+                <div id="div_resultado_paginacao">teste</div>
+              </div>
+            </div>    
+          </div>
         </div><!-- /row-->
       </div><!-- /sectionCard-->
 
@@ -320,6 +266,7 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
       <div class="col-md-3">
         <h4>links uteis</h4>
         <ul class="nav">
+          <li><a href="geraRelatorio.php">Gerar Relatório</a></li>
           <li><a href="">Ajuda</a></li>
           <li><a href="#" class="lightbox">Contato</a></li>
         </ul>
@@ -352,3 +299,4 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
   <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
+<?php  include ("coleta.php"); ?>
