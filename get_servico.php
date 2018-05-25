@@ -16,7 +16,7 @@ $offset = $_POST['offset'];
 //////////////////////////////////////////////////////////////////////
 //======== recupera o total de registros com base no filtro =======//
 $sql = " SELECT COUNT(*) as total_registros FROM usuario WHERE 1=1 ";
-$sql.= $nomeServico != "" ? " AND idProfissao LIKE '%$nomeServico%' " : "";
+$sql.= $nomeServico != "" ? " AND idProfissao LIKE '%$nomeServico%' OR idProfissao2 LIKE '%$nomeServico%' " : "";
 $sql.= $nomeLocal != "" ? " AND idCidade  Like '$nomeLocal' " : "";
 
 $resultado_id = mysqli_query($conexao, $sql);
@@ -33,7 +33,7 @@ if($resultado_id){
 //////////////////////////////////////////////////////////////////////
 
 $sql = " SELECT * FROM usuario WHERE 1=1 ";
-$sql.= $nomeServico != "" ? " AND idProfissao OR idProfissao2 LIKE '%$nomeServico%' " : "";
+$sql.= $nomeServico != "" ? " AND idProfissao LIKE '%$nomeServico%' OR idProfissao2 LIKE '%$nomeServico%' " : "";
 $sql.= $nomeLocal != "" ? " AND idCidade LIKE '%$nomeLocal%' " : "";
 
 $sql.=" LIMIT $registros_por_pagina OFFSET $offset ";
