@@ -24,7 +24,12 @@ $sql = "update usuario set nome = '$nome', email = '$email', idEstado = '$estado
 
 if (mysqli_query($conexao, $sql)) {
 
-	echo "alteração realizada";
+echo "Suas Informações seram atualizadas!";
+
+unset($_SESSION['usuario']);
+unset($_SESSION['senha']);
+
+header('Location: index.php');
 
 }else{
 

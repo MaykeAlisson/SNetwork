@@ -30,8 +30,7 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
   <script type="text/javascript" src="js/listaCard.js"></script>
   <script type="text/javascript" src="js/buscaServico.js"></script>
   <script type="text/javascript" src="js/contatoLightbox.js"></script>
-  <script type="text/javascript" src="js/cadastroUserLightbox.js"></script>
-  <script type="text/javascript" src="js/coletaLightbox.js"></script>
+  
   <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <!--CSS-->
@@ -39,8 +38,7 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
   <link href="css/estilo.css" rel="stylesheet">
   <link href="css/contato.css" rel="stylesheet">
   <link href="css/cadastroUser.css" rel="stylesheet">
-  <link href="css/coleta.css" rel="stylesheet">
-  <link href="css/avaliacao.css" rel="stylesheet">
+  
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -138,7 +136,7 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
 <p>
   Para Dúvidas, Elogios, Críticas e/ou sugestões.
 </p>
-<form class="form" action="enviarContato.php" method="post">
+<form class="form" action="contatoDAO.php" method="post">
   <div class="input-wrap">
     <label class="input-label">Nome</label>
     <input type="text" class="input" name="nome" required>
@@ -299,4 +297,3 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
   <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
-<?php  include ("coleta.php"); ?>
