@@ -44,30 +44,10 @@ include("conecta.php");
       <form method="post" action="geraPdf.php">
         <div class="row">
 
-          <!-- FUNCAO LISTA PROFICAO -->
-          <?php
-          function listaProfissao($conexao){
-            $profissoes = array();
-            $resultadoP = mysqli_query($conexao, "select * from profissao");
-            while ($profissao = mysqli_fetch_assoc($resultadoP)) {
-              array_push($profissoes, $profissao);
-            }
-            return $profissoes;
-          }
-          ?>
+          <!-- PROFICAO -->
           <div class="col-md-6">
             <label>Profissão</label>
-            <select class="form-control" name="profissao">
-              <option>Selecione uma Profissão</option>
-              <?php
-              $profissoes = listaProfissao($conexao);
-              foreach ($profissoes as $profissao) {
-                ?>
-                <option value="<?=$profissao['nome']?>"><?=$profissao['nome']?></option>
-                <?php
-              }
-              ?>
-            </select>
+            <input type="text" class="form-control" name="profissao" placeholder="Didige uma Profissão">            
           </div>
           <!-- SELEÇÃO CIDADE -->
           <div class="col-md-6">

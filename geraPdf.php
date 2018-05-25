@@ -9,13 +9,22 @@ $cidade = $_POST['cidade'];
 $html = "";
 
 
-$sql = "SELECT * FROM usuario WHERE idProfissao OR idProfissao2 = '$profissao' AND idCidade like '%$cidade%' ";
+$sql = "SELECT * FROM usuario WHERE idProfissao like '%$profissao%' OR idProfissao2 like '%$profissao%' AND idCidade like '%$cidade%' ";
+
 
 $resultado = mysqli_query($conexao, $sql);
 
 
-	while ($registro = mysqli_fetch_assoc($resultado)) {
-		$html .= '<li> Nome: '.$registro['nome']. '<br> 1ª Profissão: '.$registro['idProfissao'].'<br> 2º Profissão: '.$registro['idProfissao2']. ' <br>Cidade: '.$registro['idCidade']. '<br> e-mail: '.$registro['email']. '<br> Telefone: '.$registro['telefone']. '<br> Status: '.$registro['disponibilidade']. "</li><hr>";
+	while ($registro = mysqli_fetch_array($resultado, MYSQLI_ASSOC)) {
+		
+		$html .= $registro['nome'] ."<br>";
+		$html .= $registro['idProfissao'] ."<br>";
+		$html .= $registro['idProfissao2'] ."";
+		$html .= $registro['cidade'] ."<br>";
+		$html .= $registro['email'] ."<br>";
+		$html .= $registro['telefone'] ."<br>";
+		$html .= $registro['disponibilidade'] ."<hr>";
+
 	}
 
 	
