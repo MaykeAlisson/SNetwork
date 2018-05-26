@@ -52,43 +52,5 @@ if ($resultado_id) {
 
 ?>
 
-<script type="text/javascript">
-   /* $(document).ready( function () {
-
-        $('.btn-like').click(function(){
-            var id_usuario = $(this).data('id_usuario');
-            var estrela = $("input[name='fb']:checked").val();
-
-
-          $('.backgroundLog').animate({'opacity':'.60'}, 300, 'linear');
-            $('.boxLog').animate({'opacity':'1.00'}, 300, 'linear');
-            $('.backgroundLog, .boxLog').css('display', 'block');
-
-            $('.closeLog').click(function(){
-             $('.backgroundLog, .boxLog').animate({'opacity':'0'}, 300, 'linear', function() {
-                $('.backgroundLog, .boxLog').css('display','none');
-            });
-         });
-
-            $('.backgroundLog').click(function(){
-                $('.backgroundLog, .boxLog').animate({'opacity':'0'}, 300, 'linear', function() {
-                    $('.backgroundLog, .boxLog').css('display','none');
-                });
-            });      
-
-            $('#btn-like-'+id_usuario).hide();
-
-            $.ajax({
-             url: 'like.php',
-             method: 'post',
-             data: { like_id_usuario: id_usuario, estrelas: estrela },
-             success:function (data) {
-                alert(data);
-            }
-        });
-
-        });
-    });  */
-</script>
 
 

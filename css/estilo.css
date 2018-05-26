@@ -57,63 +57,66 @@ nav.navbar-transparente{
 }
 
 #login-dp{
-    min-width: 250px;
-    padding: 14px 14px 0;
-    overflow:hidden;
-    background-color:rgba(255,255,255,.8);
+	min-width: 250px;
+	padding: 14px 14px 0;
+	overflow:hidden;
+	background-color:rgba(255,255,255,.8);
 }
 #login-dp .help-block{
-    font-size:12px    
+	font-size:12px    
 }
 #login-dp .bottom{
-    background-color:rgba(255,255,255,.8);
-    border-top:1px solid #ddd;
-    clear:both;
-    padding:14px;
+	background-color:rgba(255,255,255,.8);
+	border-top:1px solid #ddd;
+	clear:both;
+	padding:14px;
 }
 #login-dp .social-buttons{
-    margin:12px 0    
+	margin:12px 0    
 }
 #login-dp .social-buttons a{
-    width: 49%;
+	width: 49%;
 }
 #login-dp .form-group {
-    margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 .btn-fb{
-    color: #fff;
-    background-color:#3b5998;
+	color: #fff;
+	background-color:#3b5998;
 }
 .btn-fb:hover{
-    color: #fff;
-    background-color:#496ebc 
+	color: #fff;
+	background-color:#496ebc 
 }
 .btn-tw{
-    color: #fff;
-    background-color:#55acee;
+	color: #fff;
+	background-color:#55acee;
 }
 .btn-tw:hover{
-    color: #fff;
-    background-color:#59b5fa;
+	color: #fff;
+	background-color:#59b5fa;
 }
 @media(max-width:768px){
-    #login-dp{
-        background-color: inherit;
-        color: #fff;
-    }
-    #login-dp .bottom{
-        background-color: inherit;
-        border-top:0 none;
-    }
+	#login-dp{
+		background-color: inherit;
+		color: #fff;
+	}
+	#login-dp .bottom{
+		background-color: inherit;
+		border-top:0 none;
+	}
 }
 .navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover{
 	background-color: #9d9d9d;
 }
 
+.barra{
+	margin-bottom: 90px;
+}
 /* ------------------------------------------PRIMEIRA SEÇÃO----------------------------------- */
 
 .capa{
-	margin-top: 90px;
+	
 	margin-bottom: -60px;
 	/*display: table;*/
 	/*width: 100%;*/
@@ -236,14 +239,21 @@ h2{/* FORMATAÇAO H2 */
 }
 
 @media screen and (min-width: 768px){/* FORMATAÇAO SEÇAO CATEGORIA PARA TELAS MAIORES QUE 768PX */
-#categoria{
-	height: 600px;
-	overflow: auto;
-}
+	#categoria{
+		height: 600px;
+		overflow: auto;
+	}
 }
 
 @media screen and (max-width: 767px){/* FORMATAÇAO SEÇAO CATEGORIA PARA TELAS MENORES QUE 767PX */
-	
+	#divCate{
+		margin-top: 50px;
+	}
+	#categoria{
+		height: 100px;
+		overflow: auto;
+
+	}
 	
 }
 
@@ -266,7 +276,7 @@ h2{/* FORMATAÇAO H2 */
 	margin-right: 5px;
 	margin-bottom: 5px;
 	border: 1px solid #A9A9A9;
-    border-radius: 6px;
+	border-radius: 6px;
 	/*float: left;*/
 	max-width: 682px;
 }
@@ -275,7 +285,7 @@ h2{/* FORMATAÇAO H2 */
 	margin-top: 5px;
 	font-size: 15px;
 	font-weight: 700;
-    line-height: 21px;
+	line-height: 21px;
 	/*text-align: center;*/
 }
 
@@ -294,35 +304,35 @@ h2{/* FORMATAÇAO H2 */
 }
 .cardUl{
 	box-sizing: border-box;
-    display: table;
-    margin: 0;
-    min-width: 100%;
-    padding: 0;
-    table-layout: auto;
+	display: table;
+	margin: 0;
+	min-width: 100%;
+	padding: 0;
+	table-layout: auto;
 }
 ul.cardUl {
-    list-style: outside none none;
-    margin: 0;
-    padding: 0;
+	list-style: outside none none;
+	margin: 0;
+	padding: 0;
 }
 .cardLi{
 	display: table-cell;
-    padding: 0;
-    vertical-align: top;
+	padding: 0;
+	vertical-align: top;
 }
 .cardValue {
-    /*display: block;*/
-    font-size: 12px;
-    font-weight: 500;
-    transition: color 0.15s ease-in-out 0s;
+	/*display: block;*/
+	font-size: 12px;
+	font-weight: 500;
+	transition: color 0.15s ease-in-out 0s;
 }
 .cardLabel {
-    color: #8899a6;
-    font-size: 10px;
-    letter-spacing: 0.02em;
-    overflow: hidden;
-    text-transform: uppercase;
-    transition: color 0.15s ease-in-out 0s;
+	color: #8899a6;
+	font-size: 10px;
+	letter-spacing: 0.02em;
+	overflow: hidden;
+	text-transform: uppercase;
+	transition: color 0.15s ease-in-out 0s;
 }
 .btn-sm{
 	margin-top: -7px;

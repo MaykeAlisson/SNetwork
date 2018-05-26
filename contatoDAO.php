@@ -54,7 +54,7 @@ $mail->Body = '<label>Nome: '.$nome.'</label><br>'.
 
 // Envia o e-mail e captura o sucesso ou erro
 if($mail->Send()):
-    echo 'Enviado com sucesso !';
+	echo "Mensagem Enviada com Sucesso";    
 else:
     echo 'Erro ao enviar Email:' . $mail->ErrorInfo;
 endif;

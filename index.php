@@ -30,6 +30,7 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
   <script type="text/javascript" src="js/listaCard.js"></script>
   <script type="text/javascript" src="js/buscaServico.js"></script>
   <script type="text/javascript" src="js/contatoLightbox.js"></script>
+  <script type="text/javascript" src="js/meuJavaScript.js"></script>
   
   <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -128,6 +129,7 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
     </div>   
   </div><!-- /CONTAINER-->
 </nav><!-- /NAV -->
+<div class="barra"></div>
 
 <!--CONTATO-->
 <div class="background" ></div>
@@ -207,7 +209,7 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
           <div class="container">
             <div class="row">
               <div class="col-md-7">
-                <div id="div_resultado_paginacao">teste</div>
+                <div id="div_resultado_paginacao"></div>
               </div>
             </div>    
           </div>
@@ -225,7 +227,7 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
         return $profissoes;
       }
       ?>
-      <div class="col-md-3">
+      <div class="col-md-3" id="divCate">
         <div class="row" id="catTxt">
           Serviços
         </div>
@@ -288,7 +290,17 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
     </div>
   </footer>
 
+<script type="text/javascript">
+    $(document).ready( function () {
 
+        $('.btn-pes').click(function(){
+            $('#primeiraDiv').hide();
+            });
+         
+    });  
+
+
+</script>
 
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
