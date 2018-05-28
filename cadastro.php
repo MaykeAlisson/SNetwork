@@ -38,10 +38,11 @@ $erro_usuario = isset($_GET['erro_usuario']) ? $_GET['erro_usuario'] : 0;
     <![endif]-->
   </head>
   <body>
+  <!--BARRA DE NAVEGAÇÃO-->
     <nav class="navbar navbar-inverse" id="barra">
       <div class="container">
         <a href="index.php">
-          <span class="img-logo">S Network</span>
+          <span class="img-logo">S Network</span><!--LOGO SISTEMA-->
         </a>
       </div>
     </nav>
