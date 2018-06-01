@@ -23,6 +23,7 @@ include("conecta.php");
   <title>S Network</title>
 </head>
 <body>
+	<!-- BARRA DE NAV -->
   <nav class="navbar navbar-fixed-top" id="menu">
     <div class="col-md-4">
     </div>
