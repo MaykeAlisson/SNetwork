@@ -10,6 +10,14 @@ session_start();
 
 $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
 
+if (isset($_SESSION['usuario'])) {
+  $logado = "hidden";  
+  $deslogado = "";
+}else{
+  $logado = "";
+  $deslogado = "hidden";
+}
+
 
 ?>
 <!DOCTYPE html>
@@ -31,6 +39,11 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
   <script type="text/javascript" src="js/buscaServico.js"></script>
   <script type="text/javascript" src="js/contatoLightbox.js"></script>
   <script type="text/javascript" src="js/meuJavaScript.js"></script>
+
+  <script type="text/javascript">
+    $('.logado').hide();
+    $('.deslogado').hide();
+  </script>
   
   <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -88,8 +101,14 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
         </form>
         <div>
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="cadastro.php">Cadastrar</a></li>
-            <li class="dropdown <?= $erro == 1 ? 'open' : '' ?>">
+            <li class="<?= $logado ?>"><a href="cadastro.php">Cadastrar</a></li>
+            <li class="dropdown <?= $deslogado ?>">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?=$_SESSION['nome']?> <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="sair.php">Sair</a></li>
+              </ul>
+            </li>
+            <li class="dropdown <?= $erro == 1 ? 'open' : '' ?> <?= $logado ?>">
               <a id="entrar" data-target="#" href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Entrar</a>
               <ul id="login-dp" class="dropdown-menu">
                 <li>
@@ -159,6 +178,7 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
 
 
 <!-- DESCRIÇÃO SISTEMA -->
+
 <div class="container capa" id="primeiraDiv">  
  <h1 class="texto-capa">A qualquer hora, em qualquer lugar</h1>
  <center>
@@ -167,9 +187,9 @@ $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
  </p>
 </center>
 <div class="text-center">
- <img src="img/teste.png" class="img" class="img-responsive" >
+ <img src="img/plataformas.png" class="img" class="img-responsive" >
 </div>
-</div><!-- /CONTAINER-->
+</div>  <!-- /CONTAINER-->
 
 <!-- CONTEUDOS -->
 <section id="servicos">
