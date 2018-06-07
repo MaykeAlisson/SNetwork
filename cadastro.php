@@ -25,6 +25,8 @@ $erro_usuario = isset($_GET['erro_usuario']) ? $_GET['erro_usuario'] : 0;
   <!-- jquery - link local -->
   <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="js/funcao.js"></script>
+
+
   <!-- Bootstrap -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
   <!--CSS-->
@@ -38,7 +40,7 @@ $erro_usuario = isset($_GET['erro_usuario']) ? $_GET['erro_usuario'] : 0;
     <![endif]-->
   </head>
   <body>
-  <!--BARRA DE NAVEGAÇÃO-->
+    <!--BARRA DE NAVEGAÇÃO-->
     <nav class="navbar navbar-inverse" id="barra">
       <div class="container">
         <a href="index.php">
@@ -210,46 +212,129 @@ $erro_usuario = isset($_GET['erro_usuario']) ? $_GET['erro_usuario'] : 0;
 
       <!--CAMPO NASCIMENTO -->
       <script type='text/javascript'>
-        function MascaraData(obj) 
-        {
-         switch (obj.value.length) 
-         {
-          case 2:
-          obj.value = obj.value + "/";
-          break;
-          case 5:
-          obj.value = obj.value + "/";
-          break;
-        }
-      }
-    </script>
-    <div class="form-group col-md-4">
-      <label>Nascimento:</label>
-      <input class="form-control" type="text" name="nascimento" id="nascimento" placeholder="dd/mm/aaaa" maxlength="10"  size="14"  onKeyPress='MascaraData(this);' autocomplete="off" required="required" style="width: 110px">       
-    </div>
+        function mascaraData(val) {
+          var pass = val.value;
+          var expr = /[0123456789]/;
 
-    <!--CAMPO TELEFONE -->
-    <div class="form-group col-md-4">
-      <label>Telefone:</label>
-      <input class="form-control" type="text" name="telefone" size="15" class="phone-ddd-mask" placeholder="(00) 00000-0000" maxlength="15" id="telefone" required="requered" style="width: 130px">
-    </div>
-    <!--INICIO TERMOS DE USO -->
-    <div class="checkbox col-md-12">
-      <label>
-        <input type="checkbox" required="requered"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Aceito os Termos do Serviços. <span class="caret"></span></a>
-        <ul class="dropdown-menu">
-          <h5><b> . Limitação da responsabilidade </b></h5>
-          <i>Os materiais são fornecidos neste website sem nenhuma garantia explícita ou implícita. Em nenhum caso a S Network ou os seus colaboradores serão responsabilizados por quaisquer danos, incluindo lucros cessantes, interrupção de negócio, ou perda de informação que resultem do uso ou da incapacidade de usar os materiais. A S Network não garante a precisão ou integridade das informações.</i>
-          <br/>
-          <h5><b> . Informações enviadas pelos usuários e colaboradores</b></h5>
-          <i>Qualquer informação publicadas neste site serão considerados informação não confidencial, e qualquer violação aos direitos dos seus criadores não será de responsabilidade da S Network. É terminantemente proibido transmitir, trocar ou pulbicar, através deste website, qualquer material de cunho obsceno, difamatório ou ilegal, bem como textos de terceiros sem a autorização do autor. A S Network reserva-se o direito de restringir o acesso às informações enviadas por terceiros aos seus usuários.  
-          A S Network poderá, mas não é obrigado, a monitorar, revistar e restringir o acesso a qualquer área no site onde usuários transmitem e trocam informações entre si, incluindo, mas não limitado a, salas de chat, centro de mensagens ou outros foruns de debates, podendo retirar do ar ou retirar o acesso a qualquer destas informações ou comunicações.  Porém, a S Network não é responsável pelo conteúdo de qualquer uma das informações trocadas entre os usuários, sejam elas lícitas ou ilícitas.</i>
-        </ul>
-      </label>
-    </div><!-- FIM TERMOS DE USO -->
-    <div class="form-group"></div>
-    <button type="submit" class="btn btn-info" id="btnCadastro">Cadastrar</button>
-  </div>
+          for (i = 0; i < pass.length; i++) {
+    // charAt -> retorna o caractere posicionado no índice especificado
+    var lchar = val.value.charAt(i);
+    var nchar = val.value.charAt(i + 1);
+
+    if (i == 0) {
+      // search -> retorna um valor inteiro, indicando a posição do inicio da primeira
+      // ocorrência de expReg dentro de instStr. Se nenhuma ocorrencia for encontrada o método retornara -1
+      // instStr.search(expReg);
+      if ((lchar.search(expr) != 0) || (lchar > 3)) {
+        val.value = "";
+      }
+
+    } else if (i == 1) {
+
+      if (lchar.search(expr) != 0) {
+        // substring(indice1,indice2)
+        // indice1, indice2 -> será usado para delimitar a string
+        var tst1 = val.value.substring(0, (i));
+        val.value = tst1;
+        continue;
+      }
+
+      if ((nchar != '/') && (nchar != '')) {
+        var tst1 = val.value.substring(0, (i) + 1);
+
+        if (nchar.search(expr) != 0)
+          var tst2 = val.value.substring(i + 2, pass.length);
+        else
+          var tst2 = val.value.substring(i + 1, pass.length);
+
+        val.value = tst1 + '/' + tst2;
+      }
+
+    } else if (i == 4) {
+
+      if (lchar.search(expr) != 0) {
+        var tst1 = val.value.substring(0, (i));
+        val.value = tst1;
+        continue;
+      }
+
+      if ((nchar != '/') && (nchar != '')) {
+        var tst1 = val.value.substring(0, (i) + 1);
+
+        if (nchar.search(expr) != 0)
+          var tst2 = val.value.substring(i + 2, pass.length);
+        else
+          var tst2 = val.value.substring(i + 1, pass.length);
+
+        val.value = tst1 + '/' + tst2;
+      }
+    }
+
+    if (i >= 6) {
+      if (lchar.search(expr) != 0) {
+        var tst1 = val.value.substring(0, (i));
+        val.value = tst1;
+      }
+    }
+  }
+
+  if (pass.length > 10)
+    val.value = val.value.substring(0, 10);
+  return true;
+}
+</script>
+<div class="form-group col-md-4">
+  <label>Nascimento:</label>
+  <input class="form-control" type="text" name="nascimento" id="nascimento" placeholder="dd/mm/aaaa" maxlength="10"  size="14"  onkeypress="mascaraData(this)" autocomplete="off" required="required" style="width: 110px">       
+</div>
+
+<!--CAMPO TELEFONE -->    
+<div class="form-group col-md-4">
+  <label>Telefone:</label>
+  <script type="text/javascript">
+   /* Máscaras ER */
+   function mascara(o,f){
+     v_obj=o
+     v_fun=f
+     setTimeout("execmascara()",1)
+   }
+   function execmascara(){
+     v_obj.value=v_fun(v_obj.value)
+   }
+   function mtel(v){
+      v=v.replace(/\D/g,"");             //Remove tudo o que não é dígito
+      v=v.replace(/^(\d{2})(\d)/g,"($1) $2"); //Coloca parênteses em volta dos dois primeiros dígitos
+     v=v.replace(/(\d)(\d{4})$/,"$1-$2");    //Coloca hífen entre o quarto e o quinto dígitos
+     return v;
+   }
+   function id( el ){
+     return document.getElementById( el );
+   }
+   window.onload = function(){
+     id('telefone').onkeyup = function(){
+      mascara( this, mtel );
+    }
+  }
+</script>
+<input class="form-control" type="text" name="telefone"  placeholder="(00) 00000-0000" maxlength="15" id="telefone" required="requered" style="width: 140px">
+</div>
+<!--INICIO TERMOS DE USO -->
+<div class="checkbox col-md-12">
+  <label>
+    <input type="checkbox" required="requered"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Aceito os Termos do Serviços. <span class="caret"></span></a>
+    <ul class="dropdown-menu">
+      <h5><b> . Limitação da responsabilidade </b></h5>
+      <i>Os materiais são fornecidos neste website sem nenhuma garantia explícita ou implícita. Em nenhum caso a S Network ou os seus colaboradores serão responsabilizados por quaisquer danos, incluindo lucros cessantes, interrupção de negócio, ou perda de informação que resultem do uso ou da incapacidade de usar os materiais. A S Network não garante a precisão ou integridade das informações.</i>
+      <br/>
+      <h5><b> . Informações enviadas pelos usuários e colaboradores</b></h5>
+      <i>Qualquer informação publicadas neste site serão considerados informação não confidencial, e qualquer violação aos direitos dos seus criadores não será de responsabilidade da S Network. É terminantemente proibido transmitir, trocar ou pulbicar, através deste website, qualquer material de cunho obsceno, difamatório ou ilegal, bem como textos de terceiros sem a autorização do autor. A S Network reserva-se o direito de restringir o acesso às informações enviadas por terceiros aos seus usuários.  
+      A S Network poderá, mas não é obrigado, a monitorar, revistar e restringir o acesso a qualquer área no site onde usuários transmitem e trocam informações entre si, incluindo, mas não limitado a, salas de chat, centro de mensagens ou outros foruns de debates, podendo retirar do ar ou retirar o acesso a qualquer destas informações ou comunicações.  Porém, a S Network não é responsável pelo conteúdo de qualquer uma das informações trocadas entre os usuários, sejam elas lícitas ou ilícitas.</i>
+    </ul>
+  </label>
+</div><!-- FIM TERMOS DE USO -->
+<div class="form-group"></div>
+<button type="submit" class="btn btn-info" id="btnCadastro">Cadastrar</button>
+</div>
 </form><!--FIM DO FORMULARIO DE CADASTRO-->
 
 

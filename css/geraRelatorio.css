@@ -8,3 +8,19 @@
 #btnBuscar{
 	margin-top: 10px;
 }
+
+ul>li>a {
+	margin-right: -5px;
+	text-decoration: none;
+	color: #000000;
+}
+
+ul>li>a:hover {/* ESTADO HOVER DO MENU */
+	color: white;
+	background: none;
+	text-decoration: none;
+}
+
+ul {
+ list-style-type: none;
+ } 

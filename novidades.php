@@ -2,12 +2,6 @@
 MAYKE ALISSON MOURA FURTADO 
 GRADUADO EM ANALISE E DESENVOLVIMENTO DE SISTEMAS 
 -->
-<?php
-
-include("conecta.php");
-
-
-?>
 
 <!doctype html>
 <html lang="pt-br">
@@ -18,7 +12,7 @@ include("conecta.php");
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
-  <link href="css/geraRelatorio.css" rel="stylesheet">
+  <link href="css/sobre.css" rel="stylesheet">
 
   <title>S Network</title>
 </head>
@@ -26,9 +20,6 @@ include("conecta.php");
 	<!-- BARRA DE NAV -->
   <nav class="navbar navbar-fixed-top" id="menu">
     <div class="col-md-4">
-      <ul>
-        <li><a href="index.php">Inicio</a></li>
-      </ul>
     </div>
     <div class="col-md-4">
       <a class="navbar-brand" href="index.php">
@@ -38,34 +29,7 @@ include("conecta.php");
     <div class="col-md-4"></div>
   </nav>
 
-  <!-- FORMULARIO PARA GERAR RELATORIO -->
-  <div class="col-md-12">
-    <h1>Selecione você mesmo o profissional que deseja, e faça seu classificados.</h1>
-  </div>
-  <div class="col-md-3"></div>
-  <div class="col-md-6 container">   
-    <div id="formRelatorio">
-      <form method="post" action="geraPdf.php">
-        <div class="row">
-
-          <!-- PROFICAO -->
-          <div class="col-md-6">
-            <label>Profissão</label>
-            <input type="text" class="form-control" name="profissao" placeholder="Didige uma Profissão">            
-          </div>
-          <!-- SELEÇÃO CIDADE -->
-          <div class="col-md-6">
-            <label>Cidade</label>
-            <input type="text" class="form-control" name="cidade" placeholder="Digite sua cidade">
-          </div>
-        </div>
-        <div id="btnBuscar">
-          <button type="submit" class="btn btn-outline-secondary">Buscar</button>
-        </div>
-      </form>
-    </div>
-  </div>
-  <div class="col-md-3"></div>
+  
   <!-- Optional JavaScript -->
   <!-- jQuery first, then Popper.js, then Bootstrap JS -->
   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

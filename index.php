@@ -83,7 +83,6 @@ if (isset($_SESSION['usuario'])) {
           <ul class="nav navbar-nav">
             <li><a href="index.php">Home</a></li>
             <li><a href="#" class="lightboxC">Contato</a></li>
-            <li><a href="">Ajuda</a></li>
           </ul>
           <form class="navbar-form navbar-left" role="search" id="formBuscaServico"><!-- INICIO COMPO PESQUISA CATEGORIA -->
             <input type="hidden" name="registros_por_pagina" id="registros_por_pagina" value="5" />
@@ -105,6 +104,7 @@ if (isset($_SESSION['usuario'])) {
             <li class="dropdown <?= $deslogado ?>">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?=$_SESSION['nome']?> <span class="caret"></span></a>
               <ul class="dropdown-menu">
+                <li><a href="perfil.php">Perfil</a></li>
                 <li><a href="sair.php">Sair</a></li>
               </ul>
             </li>
@@ -257,7 +257,7 @@ if (isset($_SESSION['usuario'])) {
             $profissoes = listaProfissao($conexao);
             foreach ($profissoes as $profissao) {
               ?>
-              <li><a href="" value="$profissoes['id']"><?=$profissao['nome']?></a></li>
+              <li><a href="profissional.php?profissao=<?=$profissao['nome']?>" id="liServico" name=<?=$profissao['nome']?> value=<?=$profissao['nome']?>><?=$profissao['nome']?></a></li>
               <?php
             }
             ?>
@@ -279,16 +279,15 @@ if (isset($_SESSION['usuario'])) {
       <div class="col-md-3">
         <h4>company</h4>
         <ul class="nav">
-          <li><a href="">Sobre</a></li>
-          <li><a href="">Novidades</a></li>
+          <li><a href="sobre.php">Sobre</a></li>
+          <li><a href="novidades.php">Novidades</a></li>
         </ul>
       </div>
       <div class="col-md-3">
         <h4>links uteis</h4>
         <ul class="nav">
           <li><a href="geraRelatorio.php">Gerar Relatório</a></li>
-          <li><a href="">Ajuda</a></li>
-          <li><a href="#" class="lightbox">Contato</a></li>
+          <li><a href="#" class="lightboxC">Contato</a></li>
         </ul>
       </div>
       <div class="col-md-4">
@@ -300,7 +299,7 @@ if (isset($_SESSION['usuario'])) {
         <h4 class="desenvolvedor">Desenvolvido por:</h4>
         <div class="col-md-4"></div>
         <div class="col-md-4">
-          <a href="https://www.google.com.br/" class="navbar-brand"><!-- LOGO MAMF -->
+          <a href="https://www.linkedin.com/in/maykealisson/" class="navbar-brand"><!-- LOGO MAMF -->
             <span class="img-logoMamf">< MAMF ></span></a>
           </div>
           <div class="col-md-4"></div>
