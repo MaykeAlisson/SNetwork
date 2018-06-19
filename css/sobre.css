@@ -1,0 +1,91 @@
+/* MAYKE ALISSON 29/11/17 */
+
+/* ============================ LAYOUT =====================*/
+
+/* DEFINI 100% DA TELA  */
+html, body, .capa{
+	height: 100%;
+}
+
+body{
+	font-family: Montserrat,sans-serif;/* FONTES UTILIZADAS */
+}
+
+/* ---------------------BARRA DE NAVEGAÇÃO----------------------- */
+/* LOGO */
+.img-logo{
+	height: 40px;
+	width: 132px;
+	display: block;
+	background: url('../img/logoB.png') no-repeat ;
+	background-size: contain; 
+	color: transparent;
+}
+/* BARRA TRANSPARENTE */
+nav.navbar-transparente{
+	padding: 15px 0px;
+	border: none;
+	background: rgba( 0, 0, 0, 0.6 );
+}
+.navbar-brand{
+	padding: 0px;
+	padding-top: 5px;
+	
+}
+/* ESTADO LINKS */
+.navbar-inverse .navbar-nav>li>a, footer .nav a{
+	color: white;
+	margin-right: -5px;
+}
+
+.navbar-inverse .navbar-nav>li>a:hover, footer .nav a:hover{/* ESTADO HOVER DO MENU */
+	color: #9bf0e1;
+	background: none;
+}
+
+
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:focus, .navbar-inverse .navbar-nav>.open>a:hover{
+	background-color: #9d9d9d;
+}
+
+.barra{
+	margin-bottom: 90px;
+}
+/* ------------------------------------------PRIMEIRA SEÇÃO----------------------------------- */
+
+#servicos{
+	padding-top: 10px;
+	padding-bottom: 20px;
+}
+
+
+
+/* ----------------------------------RODAPE-------------------------------------------- */
+footer{
+	background: #000;
+	padding: 50px 0px 20px 0px;
+}
+
+#rodape h4{
+	color: #919496;
+	font-size: 12px;
+	text-transform: uppercase;
+}
+
+.item-rede-social{
+	float: right;
+}
+
+.desenvolvedor{
+	margin-top: 20px;
+	text-align: center;
+}
+
+.img-logoMamf{
+	height: 40px;
+	width: 132px;
+	display: block;
+	background: url('../img/logoMamfB.png') no-repeat ;
+	background-size: contain; 
+	color: transparent;
+}

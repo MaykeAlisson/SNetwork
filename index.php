@@ -7,7 +7,7 @@ include ("conecta.php");
 
 session_start();
 
-
+$profissao = isset($_GET['profissao']) ? ($_GET['profissao']) : 0;
 $erro = isset($_GET['erro']) ? ($_GET['erro']) : 0;
 
 if (isset($_SESSION['usuario'])) {
@@ -18,6 +18,14 @@ if (isset($_SESSION['usuario'])) {
   $deslogado = "hidden";
 }
 
+
+if ($profissao == null) {
+   $busca = "addCard";
+   $logado = "";
+}else{
+  $busca = "";
+  $logado = "hidden";
+}
 
 ?>
 <!DOCTYPE html>
@@ -86,8 +94,8 @@ if (isset($_SESSION['usuario'])) {
           </ul>
           <form class="navbar-form navbar-left" role="search" id="formBuscaServico"><!-- INICIO COMPO PESQUISA CATEGORIA -->
             <input type="hidden" name="registros_por_pagina" id="registros_por_pagina" value="5" />
-          <input type="hidden" name="offset" id="offset" value="0" />
-           <div class="form-group left-inner-addon" id="#buscaSer">
+            <input type="hidden" name="offset" id="offset" value="0" />
+            <div class="form-group left-inner-addon" id="#buscaSer">
              <i class="glyphicon glyphicon-search"></i>
              <input type="text" id="nomeServico" name="nomeServico" class="form-control" placeholder="Serviço" style="width: 150px"><!-- /CAMPO DE PESQUISA CATEGORIA-->
            </div> 
@@ -179,7 +187,7 @@ if (isset($_SESSION['usuario'])) {
 
 <!-- DESCRIÇÃO SISTEMA -->
 
-<div class="container capa" id="primeiraDiv">  
+<div class="container capa <?= $logado ?>" id="primeiraDiv">  
  <h1 class="texto-capa">A qualquer hora, em qualquer lugar</h1>
  <center>
   <p class="desc">
@@ -201,17 +209,15 @@ if (isset($_SESSION['usuario'])) {
         Só para
         <br>
         <span class="voce">você</span>
+        <br>
+        em breve:
         <section style="margin-bottom: 50px; margin-top: 30px;">
           <header>
-            <h2 class="SectionTitle">Últimos serviços acessados</h2>
+            <h2 class="SectionTitle">Chatterbot</h2>
+            <h2 class="SectionTitle">Sistema de avaliação</h2>
+            <h2 class="SectionTitle">agendamento de serviços</h2>
           </header>
           <main id="searchdServico"></main>
-        </section>
-        <section style="margin-bottom: 50px;">
-          <header>
-            <h2 class="SectionTitle">Últimos termos pesquisados</h2>
-          </header>
-          <main id="searchdTermos"></main>
         </section>
       </div>
       <!-- ULTIMOS SERVIÇOS -->
@@ -221,9 +227,63 @@ if (isset($_SESSION['usuario'])) {
             Últimos Serviços Adicionados 
           </h4>
         </div>
-        <div class="row" id="addCard">
+        <div class="row" id="<?= $busca ?>">
           <!-- INICIO DO CARD-->  
           
+          <?php
+          $profissao = $_GET['profissao'];
+          $maximoCar = 6;
+
+
+          $sql = "SELECT * FROM usuario WHERE idProfissao = '$profissao' OR idProfissao2 = '$profissao' ";
+
+          $resultado_id = mysqli_query($conexao, $sql);
+
+          if (mysqli_num_rows($resultado_id) == 0 ) {
+            echo "Nenhum Profissional desta área cadastrado !";
+          }else{
+
+          if ($resultado_id) {
+
+            while ($registro = mysqli_fetch_array($resultado_id, MYSQLI_ASSOC)) {
+              echo '<div class=" cardUser col-md-12">
+              <div class="cardNome">
+              <span style="word-spacing: -6px;">'.$registro['nome'].'</span>
+              </div>
+              <div class="cardPro">
+              <span class="glyphicon glyphicon-education" style="word-spacing: -7px;"> '.$registro['idProfissao'].'</span>
+              <span class="cardPro2 glyphicon glyphicon-education" style="word-spacing: -7px;"> '.$registro['idProfissao2'].'</span>
+              </div>
+              <div class="cardInfo">
+              <ul class="cardUl">
+              <li class="cardLi">
+              <span class="cardValue glyphicon glyphicon-globe"> '.$registro['idCidade'].'</span>
+              <span class="cardValue glyphicon glyphicon-earphone" id="tel"> '.$registro['telefone'].'</span>
+              </li>
+              </ul>
+              <div class="estrelas">
+              <ul class="cardUl">
+              <li class="cardLi">
+              <span class="cardLabel">Status:</span>
+              <span class="cardValue"> '.$registro['disponibilidade'].'</span>
+              </li>
+              <li class="cardLi">
+              <span class="cardLabel">Especialização:</span>     
+              <span class="cardValue"> '.$registro['observacao'].'</span>         
+              </li>          
+              </ul>
+              </div>
+              </div>
+              </div>
+              ';
+            }
+
+
+          }else{
+            echo "Erro na consulta de usuarios no banco de dados";
+          }
+        }
+          ?>
 
           
           <div class="container">
@@ -257,7 +317,7 @@ if (isset($_SESSION['usuario'])) {
             $profissoes = listaProfissao($conexao);
             foreach ($profissoes as $profissao) {
               ?>
-              <li><a href="profissional.php?profissao=<?=$profissao['nome']?>" id="liServico" name=<?=$profissao['nome']?> value=<?=$profissao['nome']?>><?=$profissao['nome']?></a></li>
+              <li><a href="index.php?profissao=<?=$profissao['nome']?>" id="liServico" name=<?=$profissao['nome']?> value=<?=$profissao['nome']?>><?=$profissao['nome']?></a></li>
               <?php
             }
             ?>
@@ -280,7 +340,6 @@ if (isset($_SESSION['usuario'])) {
         <h4>company</h4>
         <ul class="nav">
           <li><a href="sobre.php">Sobre</a></li>
-          <li><a href="novidades.php">Novidades</a></li>
         </ul>
       </div>
       <div class="col-md-3">
@@ -291,15 +350,10 @@ if (isset($_SESSION['usuario'])) {
         </ul>
       </div>
       <div class="col-md-4">
-        <ul class="nav">
-          <li class="item-rede-social"><a href=""><img src="img/facebook.png"></a></li>
-          <li class="item-rede-social"><a href=""><img src="img/twitter.png"></a></li>
-          <li class="item-rede-social"><a href=""><img src="img/instagram.png"></a></li>
-        </ul>
         <h4 class="desenvolvedor">Desenvolvido por:</h4>
         <div class="col-md-4"></div>
         <div class="col-md-4">
-          <a href="https://www.linkedin.com/in/maykealisson/" class="navbar-brand"><!-- LOGO MAMF -->
+          <a href="https://br.linkedin.com/in/maykealisson" class="navbar-brand"><!-- LOGO MAMF -->
             <span class="img-logoMamf">< MAMF ></span></a>
           </div>
           <div class="col-md-4"></div>
@@ -309,17 +363,17 @@ if (isset($_SESSION['usuario'])) {
     </div>
   </footer>
 
-<script type="text/javascript">
+  <script type="text/javascript">
     $(document).ready( function () {
 
-        $('.btn-pes').click(function(){
-            $('#primeiraDiv').hide();
-            });
-         
+      $('.btn-pes').click(function(){
+        $('#primeiraDiv').hide();
+      });
+
     });  
 
 
-</script>
+  </script>
 
 
   <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
