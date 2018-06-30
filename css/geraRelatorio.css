@@ -24,3 +24,8 @@ ul>li>a:hover {/* ESTADO HOVER DO MENU */
 ul {
  list-style-type: none;
  } 
+
+ h1{
+ 	text-align: center;
+ 	font-size:27px ;  
+ }
