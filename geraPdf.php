@@ -9,7 +9,7 @@ $cidade = $_POST['cidade'];
 $html = "";
 
 
-$sql = "SELECT * FROM usuario WHERE idProfissao like '%$profissao%' OR idProfissao2 like '%$profissao%' AND idCidade like '%$cidade%' ";
+$sql = " SELECT * FROM usuario WHERE idProfissao like '%$profissao%' OR idProfissao2 like '%$profissao%' AND idCidade LIKE '%$cidade%' ";
 
 
 $resultado = mysqli_query($conexao, $sql);
