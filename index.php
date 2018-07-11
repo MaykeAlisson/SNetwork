@@ -21,10 +21,10 @@ if (isset($_SESSION['usuario'])) {
 
 if ($profissao == null) {
    $busca = "addCard";
-   $logado = "";
+   $logado2 = "";
 }else{
   $busca = "";
-  $logado = "hidden";
+  $logado2 = "hidden";
 }
 
 ?>
@@ -132,7 +132,7 @@ if ($profissao == null) {
                      <div class="form-group">
                        <label class="sr-only">Senha</label>
                        <input type="password" class="form-control" name="senha" id="formLogarSenha" placeholder="Senha" required>
-                       <div class="help-block text-right"><a href="">Esqueceu a senha ?</a></div>
+                       <div class="help-block text-right"><a href="#" class="lightboxC">Esqueceu a senha ?</a></div>
                      </div>
                      <div class="form-group">
                        <button type="submit" class="btn btn-primary btn-block">Entrar</button>
@@ -145,8 +145,7 @@ if ($profissao == null) {
                    ?>
                  </div>
                  <div class="bottom text-center">
-                  Novo aqui ? <a href="#" class="lightboxCad"><b>Junte-se a nós</b></a>
-                  Anunciar Serviço ? <a href="cadastro.php"><b>Aqui</b></a>
+                  Novo aqui ? <a href="cadastro.php"><b>Junte-se a nós</b></a>
                 </div>
               </div>
             </li>
@@ -187,7 +186,7 @@ if ($profissao == null) {
 
 <!-- DESCRIÇÃO SISTEMA -->
 
-<div class="container capa <?= $logado ?>" id="primeiraDiv">  
+<div class="container capa <?= $logado2 ?>" id="primeiraDiv">  
  <h1 class="texto-capa">A qualquer hora, em qualquer lugar</h1>
  <center>
   <p class="desc">
